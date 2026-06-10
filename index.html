@@ -426,13 +426,16 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:2rem;}
 .blog-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;cursor:pointer;}
 .blog-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
-.blog-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;}
+.blog-thumb{height:180px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;overflow:hidden;}
 .blog-thumb.a{background:linear-gradient(135deg,#1e1030,#3d2a6e);}
 .blog-thumb.b{background:linear-gradient(135deg,#0e2a28,#1a5e58);}
 .blog-thumb.c{background:linear-gradient(135deg,#2a1228,#6e2a5e);}
 .blog-thumb.d{background:linear-gradient(135deg,#1c1a0e,#5a5020);}
 .blog-thumb.e{background:linear-gradient(135deg,#1a0e20,#4a1a6e);}
 .blog-thumb.f{background:linear-gradient(135deg,#0e1a28,#1a3a5e);}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;transition:transform 0.4s;}
+.blog-card:hover .blog-thumb img{transform:scale(1.05);}
+.blog-thumb .blog-cat-tag{position:relative;z-index:2;}
 .blog-cat-tag{position:absolute;bottom:10px;left:12px;font-size:0.65rem;background:rgba(0,0,0,0.5);padding:3px 10px;border-radius:20px;color:var(--muted);backdrop-filter:blur(4px);letter-spacing:0.08em;text-transform:uppercase;}
 .blog-body{padding:1.25rem;}
 .blog-meta{display:flex;gap:1rem;margin-bottom:0.6rem;align-items:center;}
@@ -1246,7 +1249,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 1 -->
         <div class="blog-card reveal" onclick="openPost('post1')">
-          <div class="blog-thumb a">📱<span class="blog-cat-tag">Instagram Growth</span></div>
+          <div class="blog-thumb a"><img src="cover_1.jpg" alt="Post Less Grow More - Instagram Growth Strategy by INAYA Studio"><span class="blog-cat-tag">Instagram Growth</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1266,7 +1269,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 2 -->
         <div class="blog-card reveal" onclick="openPost('post2')">
-          <div class="blog-thumb b">💰<span class="blog-cat-tag">Content Psychology</span></div>
+          <div class="blog-thumb b"><img src="cover_2.jpg" alt="How to make money from digital products - INAYA Studio"><span class="blog-cat-tag">Content Psychology</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1286,7 +1289,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 3 -->
         <div class="blog-card reveal" onclick="openPost('post3')">
-          <div class="blog-thumb c">📊<span class="blog-cat-tag">Productivity</span></div>
+          <div class="blog-thumb c"><img src="cover_3.jpg" alt="Notion setup that replaced 4 apps for freelancers - INAYA Studio"><span class="blog-cat-tag">Productivity</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1306,7 +1309,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 4 -->
         <div class="blog-card reveal" onclick="openPost('post4')">
-          <div class="blog-thumb d">📌<span class="blog-cat-tag">Pinterest</span></div>
+          <div class="blog-thumb d"><img src="cover_4.jpg" alt="Pinterest algorithm secret for free traffic - INAYA Studio"><span class="blog-cat-tag">Pinterest</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1326,7 +1329,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 5 -->
         <div class="blog-card reveal" onclick="openPost('post5')">
-          <div class="blog-thumb e">🌐<span class="blog-cat-tag">Business Strategy</span></div>
+          <div class="blog-thumb e"><img src="cover_5.jpg" alt="Why your business needs a website before social media - INAYA Studio"><span class="blog-cat-tag">Business Strategy</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1346,7 +1349,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 6 -->
         <div class="blog-card reveal" onclick="openPost('post6')">
-          <div class="blog-thumb f">🚀<span class="blog-cat-tag">Consumer Psychology</span></div>
+          <div class="blog-thumb f"><img src="cover_6.jpg" alt="Psychology of why people buy and how to use it ethically - INAYA Studio"><span class="blog-cat-tag">Consumer Psychology</span></div>
           <div class="blog-body">
             <div class="blog-meta">
               <span class="blog-date">June 2026</span>
@@ -1366,7 +1369,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 7 -->
         <div class="blog-card reveal" onclick="openPost('post7')">
-          <div class="blog-thumb a">🎨<span class="blog-cat-tag">Marketing Psychology</span></div>
+          <div class="blog-thumb a"><img src="cover_7.jpg" alt="Colour psychology behind viral brands - INAYA Studio"><span class="blog-cat-tag">Marketing Psychology</span></div>
           <div class="blog-body">
             <div class="blog-meta"><span class="blog-date">June 2026</span><span class="blog-read">6 min read</span></div>
             <div class="blog-title">The Colour Psychology Behind Every Viral Brand You Love</div>
@@ -1380,7 +1383,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 8 -->
         <div class="blog-card reveal" onclick="openPost('post8')">
-          <div class="blog-thumb b">🔥<span class="blog-cat-tag">Content Strategy</span></div>
+          <div class="blog-thumb b"><img src="cover_8.jpg" alt="Why 90% of content gets zero engagement - INAYA Studio"><span class="blog-cat-tag">Content Strategy</span></div>
           <div class="blog-body">
             <div class="blog-meta"><span class="blog-date">June 2026</span><span class="blog-read">7 min read</span></div>
             <div class="blog-title">Why 90% of Content Gets Zero Engagement (And the 10% That Goes Viral)</div>
@@ -1394,7 +1397,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 9 -->
         <div class="blog-card reveal" onclick="openPost('post9')">
-          <div class="blog-thumb c">🧠<span class="blog-cat-tag">Consumer Psychology</span></div>
+          <div class="blog-thumb c"><img src="cover_9.jpg" alt="What happens in a customer's brain buying decision - INAYA Studio"><span class="blog-cat-tag">Consumer Psychology</span></div>
           <div class="blog-body">
             <div class="blog-meta"><span class="blog-date">June 2026</span><span class="blog-read">6 min read</span></div>
             <div class="blog-title">The Buying Decision: What Really Happens in a Customer's Brain</div>
@@ -1408,7 +1411,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 10 -->
         <div class="blog-card reveal" onclick="openPost('post10')">
-          <div class="blog-thumb d">📌<span class="blog-cat-tag">Pinterest Marketing</span></div>
+          <div class="blog-thumb d"><img src="cover_10.jpg" alt="How to create Pinterest pins that get clicked not just saved - INAYA Studio"><span class="blog-cat-tag">Pinterest Marketing</span></div>
           <div class="blog-body">
             <div class="blog-meta"><span class="blog-date">June 2026</span><span class="blog-read">5 min read</span></div>
             <div class="blog-title">How to Create Pinterest Pins That Get Clicked (Not Just Saved)</div>
@@ -1422,7 +1425,7 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
         <!-- POST 11 -->
         <div class="blog-card reveal" onclick="openPost('post11')">
-          <div class="blog-thumb e">💜<span class="blog-cat-tag">Brand Psychology</span></div>
+          <div class="blog-thumb e"><img src="cover_10.jpg" alt="Why people follow some brands obsessively brand psychology - INAYA Studio"><span class="blog-cat-tag">Brand Psychology</span></div>
           <div class="blog-body">
             <div class="blog-meta"><span class="blog-date">June 2026</span><span class="blog-read">6 min read</span></div>
             <div class="blog-title">Why People Follow Some Brands Obsessively (And Ignore Others Completely)</div>
