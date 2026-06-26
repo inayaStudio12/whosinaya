@@ -303,7 +303,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .port-img.b{background:linear-gradient(135deg,#0e2a28 0%,#1a5e58 100%);}
 .port-img.c{background:linear-gradient(135deg,#2a1228 0%,#6e2a5e 100%);}
 .port-img.d{background:linear-gradient(135deg,#1c1a0e 0%,#5a5020 100%);}
-.port-tag-label{position:absolute;bottom:10px;left:12px;font-size:0.7rem;background:rgba(0,0,0,0.5);padding:3px 10px;border-radius:20px;color:var(--muted);backdrop-filter:blur(6px);}
+.port-tab{background:var(--bg2);border:1px solid var(--border);color:var(--muted);padding:6px 16px;border-radius:20px;font-size:0.8rem;cursor:pointer;transition:all 0.2s;}
+.port-tab.active,.port-tab:hover{background:var(--accent);color:#0e0c14;border-color:var(--accent);font-weight:600;}
+.port-card[data-cat]{cursor:pointer;}
+.port-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;}
+.port-card:hover .port-img img{transform:scale(1.05);}
+.port-card.hidden{display:none;}
 .port-body{background:var(--bg2);padding:1rem 1.25rem;}
 .port-title{font-size:0.9rem;font-weight:500;margin-bottom:3px;}
 .port-sub{font-size:0.78rem;color:var(--muted);}
@@ -762,222 +767,322 @@ footer{border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;align
 
 <!-- ══ PAGE: PORTFOLIO ══ -->
 <div id="page-portfolio" class="page">
+
+<!-- Portfolio Modal -->
+<div id="port-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;overflow-y:auto;padding:2rem 1rem;">
+  <div style="max-width:700px;margin:0 auto;background:var(--bg2);border-radius:16px;border:1px solid var(--border);overflow:hidden;">
+    <div style="position:relative;">
+      <img id="modal-img" src="" alt="" style="width:100%;max-height:400px;object-fit:cover;">
+      <button onclick="closePortModal()" style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);border:none;color:white;width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
+      <span id="modal-tag" style="position:absolute;bottom:12px;left:12px;background:rgba(0,0,0,0.6);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:0.75rem;backdrop-filter:blur(6px);"></span>
+    </div>
+    <div style="padding:1.5rem;">
+      <div id="modal-title" style="font-size:1.2rem;font-weight:600;margin-bottom:0.5rem;"></div>
+      <div id="modal-desc" style="color:var(--muted);font-size:0.9rem;line-height:1.7;margin-bottom:1.25rem;"></div>
+      <div id="modal-tags" style="display:flex;gap:0.5rem;flex-wrap:wrap;"></div>
+    </div>
+  </div>
+</div>
+
   <div class="section-wrap">
     <div class="section-tag">✦ My work</div>
     <div class="section-title">Portfolio</div>
-    <div class="section-sub">A selection of recent projects — websites, dashboards, social media, and digital products.</div>
+    <div class="section-sub">Click any design to see details. Here's what I can create for your brand.</div>
 
-    <div class="port-grid">
-      <!-- Card 1: Social Media Strategy -->
-      <div class="port-card reveal">
-        <div class="port-img a" style="height:180px;padding:0;overflow:hidden;position:relative;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1e1030,#3d2a6e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:1rem;">
-            <!-- Phone mockup -->
-            <div style="width:60px;height:100px;background:#0e0c14;border-radius:10px;border:2px solid rgba(201,169,110,0.4);position:relative;overflow:hidden;">
-              <div style="height:6px;background:rgba(255,255,255,0.1);margin:4px 6px;border-radius:3px;"></div>
-              <div style="margin:4px 6px;">
-                <div style="height:28px;background:linear-gradient(135deg,#8b6fd4,#c9a96e);border-radius:4px;margin-bottom:4px;"></div>
-                <div style="height:8px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:3px;"></div>
-                <div style="height:8px;background:rgba(255,255,255,0.05);border-radius:2px;margin-bottom:3px;width:70%;"></div>
-                <div style="display:flex;gap:2px;margin-top:4px;">
-                  <div style="flex:1;height:16px;background:rgba(201,169,110,0.2);border-radius:2px;"></div>
-                  <div style="flex:1;height:16px;background:rgba(139,111,212,0.2);border-radius:2px;"></div>
-                </div>
-              </div>
-              <!-- notification dots -->
-              <div style="position:absolute;top:3px;right:3px;width:5px;height:5px;background:#f093b0;border-radius:50%;"></div>
-            </div>
-            <!-- Stats row -->
-            <div style="display:flex;gap:6px;margin-top:4px;">
-              <div style="background:rgba(201,169,110,0.15);border:1px solid rgba(201,169,110,0.3);border-radius:6px;padding:3px 8px;text-align:center;">
-                <div style="font-size:0.7rem;color:#c9a96e;font-weight:600;">+42%</div>
-                <div style="font-size:0.5rem;color:#a09aaf;">reach</div>
-              </div>
-              <div style="background:rgba(139,111,212,0.15);border:1px solid rgba(139,111,212,0.3);border-radius:6px;padding:3px 8px;text-align:center;">
-                <div style="font-size:0.7rem;color:#b39de0;font-weight:600;">2.4k</div>
-                <div style="font-size:0.5rem;color:#a09aaf;">follows</div>
-              </div>
-              <div style="background:rgba(240,147,176,0.15);border:1px solid rgba(240,147,176,0.3);border-radius:6px;padding:3px 8px;text-align:center;">
-                <div style="font-size:0.7rem;color:#f093b0;font-weight:600;">98%</div>
-                <div style="font-size:0.5rem;color:#a09aaf;">likes</div>
-              </div>
-            </div>
-          </div>
+    <!-- Section Tabs -->
+    <div id="port-tabs" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin:2rem 0 1rem;">
+      <button class="port-tab active" onclick="filterPort('all',this)">All</button>
+      <button class="port-tab" onclick="filterPort('social',this)">Social Media</button>
+      <button class="port-tab" onclick="filterPort('content',this)">Content Design</button>
+      <button class="port-tab" onclick="filterPort('ads',this)">Ad Design</button>
+      <button class="port-tab" onclick="filterPort('digital',this)">Digital Products</button>
+      <button class="port-tab" onclick="filterPort('branding',this)">Branding</button>
+    </div>
+
+    <div class="port-grid" id="port-grid">
+
+      <!-- SOCIAL MEDIA -->
+      <div class="port-card reveal" data-cat="social" onclick="openPortModal('port_social.jpg','Instagram Reel — SMM Content','A scroll-stopping reel designed for social media managers. Bold speech bubble text with aesthetic background video — built to stop the scroll and drive DMs.','Social Media',['Reel Design','Instagram','SMM'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_social.jpg" alt="Instagram Reel SMM" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
           <span class="port-tag-label">Social Media</span>
         </div>
         <div class="port-body">
-          <div class="port-title">Instagram Strategy — Lifestyle Brand</div>
-          <div class="port-sub">Content calendar, captions & growth plan</div>
-          <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;">
-            <span style="background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--accent);">+42% reach</span>
-            <span style="background:rgba(139,111,212,0.12);border:1px solid rgba(139,111,212,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--purple-light);">2.4k new followers</span>
-            <span style="background:rgba(240,147,176,0.12);border:1px solid rgba(240,147,176,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--pink);">98% positive sentiment</span>
-          </div>
+          <div class="port-title">Instagram Reel — SMM Content</div>
+          <div class="port-sub">Scroll-stopping reel for social media managers</div>
         </div>
       </div>
 
-      <!-- Card 2: Business Dashboard -->
-      <div class="port-card reveal">
-        <div class="port-img b" style="height:180px;padding:0;overflow:hidden;position:relative;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0e2a28,#1a5e58);padding:0.75rem;">
-            <!-- Browser bar -->
-            <div style="background:rgba(0,0,0,0.3);border-radius:6px 6px 0 0;padding:4px 8px;display:flex;align-items:center;gap:4px;margin-bottom:4px;">
-              <div style="width:5px;height:5px;border-radius:50%;background:#ff5f57;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#febc2e;"></div>
-              <div style="width:5px;height:5px;border-radius:50%;background:#28c840;"></div>
-              <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:3px;height:8px;margin-left:4px;"></div>
-            </div>
-            <!-- Dashboard content -->
-            <div style="background:rgba(0,0,0,0.2);border-radius:0 0 6px 6px;padding:6px;">
-              <!-- Stat cards row -->
-              <div style="display:flex;gap:4px;margin-bottom:5px;">
-                <div style="flex:1;background:rgba(78,205,196,0.15);border-radius:4px;padding:4px;text-align:center;">
-                  <div style="font-size:0.65rem;color:#4ecdc4;font-weight:700;">₹42k</div>
-                  <div style="font-size:0.45rem;color:#a09aaf;">revenue</div>
-                </div>
-                <div style="flex:1;background:rgba(201,169,110,0.15);border-radius:4px;padding:4px;text-align:center;">
-                  <div style="font-size:0.65rem;color:#c9a96e;font-weight:700;">18</div>
-                  <div style="font-size:0.45rem;color:#a09aaf;">clients</div>
-                </div>
-                <div style="flex:1;background:rgba(139,111,212,0.15);border-radius:4px;padding:4px;text-align:center;">
-                  <div style="font-size:0.65rem;color:#b39de0;font-weight:700;">94%</div>
-                  <div style="font-size:0.45rem;color:#a09aaf;">done</div>
-                </div>
-              </div>
-              <!-- Chart bars -->
-              <div style="display:flex;align-items:flex-end;gap:3px;height:35px;padding:0 2px;">
-                <div style="flex:1;background:rgba(78,205,196,0.4);border-radius:2px 2px 0 0;height:40%;"></div>
-                <div style="flex:1;background:rgba(78,205,196,0.6);border-radius:2px 2px 0 0;height:65%;"></div>
-                <div style="flex:1;background:rgba(78,205,196,0.5);border-radius:2px 2px 0 0;height:50%;"></div>
-                <div style="flex:1;background:rgba(78,205,196,0.8);border-radius:2px 2px 0 0;height:85%;"></div>
-                <div style="flex:1;background:rgba(78,205,196,0.6);border-radius:2px 2px 0 0;height:70%;"></div>
-                <div style="flex:1;background:rgba(201,169,110,0.8);border-radius:2px 2px 0 0;height:100%;"></div>
-                <div style="flex:1;background:rgba(78,205,196,0.5);border-radius:2px 2px 0 0;height:60%;"></div>
-              </div>
-              <!-- Task list -->
-              <div style="margin-top:4px;">
-                <div style="display:flex;align-items:center;gap:3px;margin-bottom:2px;">
-                  <div style="width:6px;height:6px;border-radius:50%;background:#4ecdc4;flex-shrink:0;"></div>
-                  <div style="height:4px;background:rgba(255,255,255,0.15);border-radius:2px;flex:1;"></div>
-                </div>
-                <div style="display:flex;align-items:center;gap:3px;">
-                  <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0;"></div>
-                  <div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;flex:1;width:60%;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span class="port-tag-label">Dashboard</span>
+      <div class="port-card reveal" data-cat="social" onclick="openPortModal('port_social.jpg','Why Your Content Isn\'t Growing','A 5-slide carousel breaking down the real reasons behind zero engagement. Educational, relatable and built to get saves — perfect for SMM and creator accounts.','Social Media',['Carousel','Educational','Instagram'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_social.jpg" alt="Why Your Content Isnt Growing" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Social Media</span>
         </div>
         <div class="port-body">
-          <div class="port-title">Business Operations Dashboard</div>
-          <div class="port-sub">Notion system for a solo entrepreneur</div>
-          <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap;">
-            <span style="background:rgba(78,205,196,0.12);border:1px solid rgba(78,205,196,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--teal);">₹42k tracked</span>
-            <span style="background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--accent);">18 clients managed</span>
-            <span style="background:rgba(139,111,212,0.12);border:1px solid rgba(139,111,212,0.3);padding:3px 10px;border-radius:20px;font-size:0.7rem;color:var(--purple-light);">94% tasks complete</span>
-          </div>
+          <div class="port-title">Why Your Content Isn't Growing</div>
+          <div class="port-sub">5-slide educational carousel</div>
         </div>
       </div>
 
-      <!-- Card 3: Portfolio Website -->
-      <div class="port-card reveal">
-        <div class="port-img c" style="height:180px;padding:0;overflow:hidden;position:relative;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#2a1228,#6e2a5e);padding:0.75rem;">
-            <!-- Browser mockup -->
-            <div style="background:rgba(0,0,0,0.35);border-radius:8px;overflow:hidden;height:100%;">
-              <!-- Browser top bar -->
-              <div style="background:rgba(0,0,0,0.4);padding:4px 8px;display:flex;align-items:center;gap:4px;">
-                <div style="width:5px;height:5px;border-radius:50%;background:#ff5f57;"></div>
-                <div style="width:5px;height:5px;border-radius:50%;background:#febc2e;"></div>
-                <div style="width:5px;height:5px;border-radius:50%;background:#28c840;"></div>
-                <div style="flex:1;background:rgba(255,255,255,0.1);border-radius:3px;height:7px;margin-left:4px;"></div>
-              </div>
-              <!-- Website preview -->
-              <div style="padding:6px;">
-                <!-- Nav -->
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-                  <div style="height:5px;width:30%;background:rgba(240,147,176,0.6);border-radius:2px;"></div>
-                  <div style="display:flex;gap:3px;">
-                    <div style="height:4px;width:15px;background:rgba(255,255,255,0.15);border-radius:1px;"></div>
-                    <div style="height:4px;width:15px;background:rgba(255,255,255,0.15);border-radius:1px;"></div>
-                    <div style="height:4px;width:15px;background:rgba(255,255,255,0.15);border-radius:1px;"></div>
-                  </div>
-                </div>
-                <!-- Hero -->
-                <div style="background:linear-gradient(135deg,rgba(240,147,176,0.15),rgba(139,111,212,0.15));border-radius:4px;padding:8px;text-align:center;margin-bottom:5px;">
-                  <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#f093b0,#8b6fd4);margin:0 auto 4px;"></div>
-                  <div style="height:4px;background:rgba(255,255,255,0.3);border-radius:2px;width:60%;margin:0 auto 3px;"></div>
-                  <div style="height:3px;background:rgba(255,255,255,0.15);border-radius:2px;width:80%;margin:0 auto;"></div>
-                </div>
-                <!-- Cards row -->
-                <div style="display:flex;gap:3px;">
-                  <div style="flex:1;height:20px;background:rgba(240,147,176,0.15);border-radius:3px;border:1px solid rgba(240,147,176,0.2);"></div>
-                  <div style="flex:1;height:20px;background:rgba(139,111,212,0.15);border-radius:3px;border:1px solid rgba(139,111,212,0.2);"></div>
-                  <div style="flex:1;height:20px;background:rgba(201,169,110,0.15);border-radius:3px;border:1px solid rgba(201,169,110,0.2);"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span class="port-tag-label">Web Design</span>
+      <div class="port-card reveal" data-cat="social" onclick="openPortModal('port_social.jpg','Black & White About Us Instagram Story','A clean, minimal About Us story in black and white. Elegant typography, faceless design — built for brands that want to look polished without showing a face.','Social Media',['Instagram Story','Minimal','About Us'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_social.jpg" alt="Black White About Us Story" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Social Media</span>
         </div>
         <div class="port-body">
-          <div class="port-title">Portfolio Website — Freelance Artist</div>
-          <div class="port-sub">One-page site, mobile-first design</div>
+          <div class="port-title">Black & White About Us Story</div>
+          <div class="port-sub">Clean minimal Instagram story</div>
         </div>
       </div>
 
-      <!-- Card 4: Canva Templates -->
-      <div class="port-card reveal">
-        <div class="port-img d" style="height:180px;padding:0;overflow:hidden;position:relative;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,#1c1a0e,#5a5020);padding:0.75rem;display:flex;flex-direction:column;justify-content:center;">
-            <!-- Template grid -->
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
-              <!-- Template 1 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#c9a96e,#8b6fd4);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;padding:4px;">
-                <div style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.3);"></div>
-                <div style="height:2px;width:80%;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
-                <div style="height:2px;width:60%;background:rgba(255,255,255,0.2);border-radius:1px;"></div>
-              </div>
-              <!-- Template 2 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#1a1030,#4ecdc4);border-radius:4px;display:flex;align-items:flex-end;padding:4px;">
-                <div style="width:100%;">
-                  <div style="height:2px;background:rgba(255,255,255,0.5);border-radius:1px;margin-bottom:2px;"></div>
-                  <div style="height:2px;background:rgba(255,255,255,0.3);border-radius:1px;width:70%;"></div>
-                </div>
-              </div>
-              <!-- Template 3 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#f093b0,#c9a96e);border-radius:4px;display:flex;align-items:center;justify-content:center;">
-                <div style="width:14px;height:14px;background:rgba(255,255,255,0.3);border-radius:2px;transform:rotate(15deg);"></div>
-              </div>
-              <!-- Template 4 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#2a1228,#8b6fd4);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
-                <div style="height:2px;width:70%;background:rgba(255,255,255,0.4);border-radius:1px;"></div>
-                <div style="height:2px;width:50%;background:rgba(255,255,255,0.2);border-radius:1px;"></div>
-              </div>
-              <!-- Template 5 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#4ecdc4,#1a5e58);border-radius:4px;display:flex;align-items:center;justify-content:center;">
-                <div style="font-size:0.8rem;">✦</div>
-              </div>
-              <!-- Template 6 -->
-              <div style="aspect-ratio:4/5;background:linear-gradient(135deg,#e8c99a,#c9a96e);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;">
-                <div style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);"></div>
-                <div style="height:2px;width:60%;background:rgba(255,255,255,0.3);border-radius:1px;"></div>
-              </div>
-            </div>
-            <!-- Label -->
-            <div style="text-align:center;margin-top:6px;">
-              <span style="font-size:0.6rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;">30 TEMPLATES</span>
-            </div>
-          </div>
-          <span class="port-tag-label">Templates</span>
+      <div class="port-card reveal" data-cat="social" onclick="openPortModal('port_social.jpg','Website Launch Instagram Post','A modern computer mockup post announcing a website launch. Clean layout, strong visual hierarchy — great for tech brands, freelancers and studios.','Social Media',['Instagram Post','Mockup','Launch'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_social.jpg" alt="Website Launch Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Social Media</span>
         </div>
         <div class="port-body">
-          <div class="port-title">Canva Instagram Pack — 30 Posts</div>
-          <div class="port-sub">Aesthetic branded templates for creators</div>
+          <div class="port-title">Website Launch Instagram Post</div>
+          <div class="port-sub">Modern mockup post for brand launch</div>
         </div>
       </div>
+
+      <div class="port-card reveal" data-cat="social" onclick="openPortModal('port_social.jpg','Virtual Assistant Services Post','A services showcase post for a virtual assistant brand. Clean layout with service highlights — designed to convert profile visitors into leads.','Social Media',['Services Post','Lead Gen','Instagram'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_social.jpg" alt="Virtual Assistant Services" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Social Media</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Virtual Assistant Services Post</div>
+          <div class="port-sub">Services showcase for VA brand</div>
+        </div>
+      </div>
+
+      <!-- CONTENT DESIGN -->
+      <div class="port-card reveal" data-cat="content" onclick="openPortModal('port_content.jpg','MindMarket Content Resource Guide','A 7-page content resource guide for creators. Covers content strategy, posting frameworks and growth tips — designed to educate and build authority.','Content Design',['Resource Guide','Multi-page','Creator Tools'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_content.jpg" alt="MindMarket Content Guide" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Content Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">MindMarket Content Resource Guide</div>
+          <div class="port-sub">7-page content guide for creators</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="content" onclick="openPortModal('port_content.jpg','INAYA Studio Content Template Presentation','An 8-slide branded presentation template for content creators. Dark aesthetic with gold accents — ready to customize for any brand pitch or strategy deck.','Content Design',['Presentation','8 Slides','Branded Template'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_content.jpg" alt="INAYA Studio Presentation" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Content Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">INAYA Studio Content Presentation</div>
+          <div class="port-sub">8-slide branded content template</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="content" onclick="openPortModal('port_content.jpg','Welcome Carousel — 8 Slides','An 8-slide welcome carousel for a brand\'s Instagram. Warm tone, clear structure — designed to introduce a brand and convert new followers into engaged fans.','Content Design',['Welcome Carousel','8 Slides','Instagram'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_content.jpg" alt="Welcome Carousel" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Content Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Welcome Carousel — 8 Slides</div>
+          <div class="port-sub">Brand introduction carousel</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="content" onclick="openPortModal('port_content.jpg','Social Media Visual Designer Post','A 4-slide Instagram post series for a social media visual designer. Strong personal branding, bold typography — built to attract design clients.','Content Design',['4 Slides','Personal Brand','Designer'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_content.jpg" alt="Social Media Visual Designer Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Content Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Social Media Visual Designer Post</div>
+          <div class="port-sub">4-slide personal brand series</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="content" onclick="openPortModal('port_content.jpg','About Me — Creator Profile','A clean About Me page design for a content creator. Minimal layout, strong personal branding — perfect for link-in-bio pages and media kits.','Content Design',['About Me','Creator','Profile'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_content.jpg" alt="About Me Creator" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Content Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">About Me — Creator Profile</div>
+          <div class="port-sub">Minimal profile page for creators</div>
+        </div>
+      </div>
+
+      <!-- AD DESIGN -->
+      <div class="port-card reveal" data-cat="ads" onclick="openPortModal('port_ads.jpg','Dynamic Coca-Cola Social Media Ad','A bold, dynamic ad design for Coca-Cola. High contrast, strong visual impact — demonstrates the ability to create on-brand ads for FMCG and beverage brands.','Ad Design',['Brand Ad','FMCG','Bold Design'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_ads.jpg" alt="Coca Cola Ad" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Ad Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Dynamic Coca-Cola Social Media Ad</div>
+          <div class="port-sub">Bold branded ad for FMCG brand</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="ads" onclick="openPortModal('port_ads.jpg','Minimalist Starbucks Instagram Story','A minimal, elegant Starbucks story ad. Soft tones, clean layout — shows ability to match premium brand aesthetics and create lifestyle-driven content.','Ad Design',['Story Ad','Minimal','Premium Brand'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_ads.jpg" alt="Starbucks Story" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Ad Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Minimalist Starbucks Instagram Story</div>
+          <div class="port-sub">Premium aesthetic story ad</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="ads" onclick="openPortModal('port_ads.jpg','Makeup Product Social Media Post','A 4-slide product showcase for a makeup brand. Elegant layout, beauty-focused aesthetic — ideal for skincare, cosmetics and lifestyle brands.','Ad Design',['Beauty','Product Ad','4 Slides'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_ads.jpg" alt="Makeup Product Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Ad Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Makeup Product Social Media Post</div>
+          <div class="port-sub">4-slide beauty product showcase</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="ads" onclick="openPortModal('port_ads.jpg','iPhone UI/UX Social Media Post','A 4-slide UI/UX concept post for iPhone. Modern, tech-forward design — demonstrates ability to create clean product-focused content for tech brands.','Ad Design',['Tech','UI/UX','Product Post'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_ads.jpg" alt="iPhone UI UX Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Ad Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">iPhone UI/UX Social Media Post</div>
+          <div class="port-sub">4-slide tech product design</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="ads" onclick="openPortModal('port_ads.jpg','Luxury Sports Car Instagram Post','A high-impact luxury car post for Instagram. Dark moody aesthetic, cinematic feel — shows ability to produce premium automotive and lifestyle content.','Ad Design',['Luxury','Automotive','Cinematic'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_ads.jpg" alt="Luxury Sports Car Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Ad Design</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Luxury Sports Car Instagram Post</div>
+          <div class="port-sub">Cinematic automotive content</div>
+        </div>
+      </div>
+
+      <!-- DIGITAL PRODUCTS -->
+      <div class="port-card reveal" data-cat="digital" onclick="openPortModal('port_digital.jpg','Marketing Psychology Principles','A one-page cheat sheet breaking down 10 marketing psychology principles. Clean dark design with gold accents — currently selling on Gumroad at ₹149.','Digital Products',['Cheat Sheet','PDF','Gumroad'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_digital.jpg" alt="Marketing Psychology Cheat Sheet" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Digital Products</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Marketing Psychology Cheat Sheet</div>
+          <div class="port-sub">1-page PDF — selling on Gumroad ₹149</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="digital" onclick="openPortModal('port_digital.jpg','Marketing Psychology Principles — Cover','A premium product cover design for the Marketing Psychology digital product. Elegant, dark aesthetic with gold typography — designed to convert on product listing pages.','Digital Products',['Cover Design','Product Page','PDF'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_digital.jpg" alt="Marketing Psychology Cover" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Digital Products</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Marketing Psychology — Cover Design</div>
+          <div class="port-sub">Premium product cover for digital download</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="digital" onclick="openPortModal('port_digital.jpg','Midnight Black Infographic','An elegant dark infographic with gold elements. Structured, readable and visually striking — ideal for educational digital products and lead magnets.','Digital Products',['Infographic','Dark Aesthetic','Gold'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_digital.jpg" alt="Midnight Black Infographic" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Digital Products</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Midnight Black Infographic</div>
+          <div class="port-sub">Elegant dark infographic with gold accents</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="digital" onclick="openPortModal('port_digital.jpg','LIMITED — Instagram Product Post','A limited offer product post for Instagram. Urgency-driven design with bold typography — built to drive clicks and sales for digital products.','Digital Products',['Limited Offer','Sales Post','Instagram'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_digital.jpg" alt="Limited Instagram Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Digital Products</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">LIMITED — Product Launch Post</div>
+          <div class="port-sub">Urgency-driven sales post</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="digital" onclick="openPortModal('port_digital.jpg','Marketing Psychology — Alternate Version','An alternate layout version of the Marketing Psychology product. Different visual approach — shows range in design style for the same product category.','Digital Products',['Alt Version','PDF Design','Layout'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_digital.jpg" alt="Marketing Psychology Alt" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Digital Products</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Marketing Psychology — Alt Version</div>
+          <div class="port-sub">Alternate layout for digital product</div>
+        </div>
+      </div>
+
+      <!-- BRANDING -->
+      <div class="port-card reveal" data-cat="branding" onclick="openPortModal('port_branding.jpg','Instagram Brand Audit — Forever Hungry Mumbai','A 9-slide Instagram brand audit for Forever Hungry Mumbai, a food brand. Covers feed analysis, content gaps, competitor benchmarking and growth recommendations.','Branding',['Brand Audit','Food Brand','Strategy'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_branding.jpg" alt="Brand Audit Forever Hungry" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Branding</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Brand Audit — Forever Hungry Mumbai</div>
+          <div class="port-sub">9-slide Instagram brand audit</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="branding" onclick="openPortModal('port_branding.jpg','Brand Audit Presentation — 6 Slides','A 6-slide brand audit presentation for Forever Hungry Mumbai. Strategic overview of brand positioning, audience and content performance.','Branding',['Brand Strategy','Presentation','6 Slides'])">
+        <div class="port-img b" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_branding.jpg" alt="Brand Audit Presentation" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Branding</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Brand Audit Presentation — 6 Slides</div>
+          <div class="port-sub">Strategic brand overview deck</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="branding" onclick="openPortModal('port_branding.jpg','Quality Control Post — Rice Mill Brand','A 4-slide social media post for a rice mill brand. Industrial yet clean design — demonstrates ability to create content for non-traditional and niche B2B brands.','Branding',['Niche Brand','B2B','4 Slides'])">
+        <div class="port-img c" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_branding.jpg" alt="Rice Mill Brand Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Branding</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Quality Control — Rice Mill Brand</div>
+          <div class="port-sub">4-slide niche B2B brand content</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="branding" onclick="openPortModal('port_branding.jpg','Nykaa Social Media Graphic Post','A 10-slide social media graphic series for Nykaa. Bold beauty brand aesthetic — demonstrates ability to match and elevate established brand identities.','Branding',['Beauty Brand','10 Slides','Nykaa'])">
+        <div class="port-img d" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_branding.jpg" alt="Nykaa Social Media Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Branding</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Nykaa Social Media Graphic Series</div>
+          <div class="port-sub">10-slide beauty brand content</div>
+        </div>
+      </div>
+
+      <div class="port-card reveal" data-cat="branding" onclick="openPortModal('port_branding.jpg','Online Exam Prep App — Instagram Post','A 4-slide Instagram post series for an online exam prep app. Clean, trust-building design — shows ability to create content for EdTech and service-based brands.','Branding',['EdTech','App Brand','4 Slides'])">
+        <div class="port-img a" style="height:200px;overflow:hidden;position:relative;">
+          <img src="port_branding.jpg" alt="Exam Prep App Post" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;">
+          <span class="port-tag-label">Branding</span>
+        </div>
+        <div class="port-body">
+          <div class="port-title">Online Exam Prep App Post</div>
+          <div class="port-sub">4-slide EdTech brand content</div>
+        </div>
+      </div>
+
     </div>
+
     <div style="text-align:center;margin-top:3rem;">
       <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.25rem;">Want to see your project here? Let's work together.</p>
       <button class="btn-gold" onclick="showPage('book')">Book a consultation 📅</button>
@@ -2043,6 +2148,37 @@ function submitBooking() {
 }
 
 // ── Thank you page ──
+function filterPort(cat, el) {
+  document.querySelectorAll('.port-tab').forEach(t => t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.port-card[data-cat]').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+function openPortModal(img, title, desc, tag, tags) {
+  document.getElementById('modal-img').src = img;
+  document.getElementById('modal-img').alt = title;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-desc').textContent = desc;
+  document.getElementById('modal-tag').textContent = tag;
+  const tagsEl = document.getElementById('modal-tags');
+  tagsEl.innerHTML = tags.map(t => `<span style="background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);padding:3px 10px;border-radius:20px;font-size:0.75rem;color:var(--accent);">${t}</span>`).join('');
+  document.getElementById('port-modal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePortModal() {
+  document.getElementById('port-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePortModal(); });
+
 function showThankYou(type) {
   const configs = {
     login: { icon: '👋', title: 'Welcome Back!', sub: "You're now logged in to INAYA Studio. Enjoy exploring!" },
